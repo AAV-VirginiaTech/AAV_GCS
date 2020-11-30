@@ -1,3 +1,6 @@
+# This is a modified version of the file souced by AUVSI SUAS. The modification includes modifying the altitude sent to interop from MSL to AGL + 22'.
+# The 22' is the MSL altitude of the competition site and is thus included in our data.
+
 # Module to receive MAVLink packets and forward telemetry via interoperability.
 # Packet details at http://mavlink.org/messages/common#GLOBAL_POSITION_INT.
 
