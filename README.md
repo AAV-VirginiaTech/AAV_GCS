@@ -1,10 +1,17 @@
-**Team Specific Files for Interop Integration**
-This repository includes all the files used in addition to the base AUVSI SUAS Interoperabilty scripts. AAV only makes modifications to the client side and uses an unmodified version of the server side for all integration testing.
+# Team Specific Files for Interop Integration
+This repository includes all the files used in addition to the base AUVSI SUAS Interoperabilty System (Interop). AAV only makes modifications to the client side and uses an unmodified version of the server side for all integration testing. The base AUVSI SUAS Interop documentation can be found [here](https://github.com/auvsi-suas/interop).
 
 
+**Modifications to Base Client Script**
+By running the deploy.bat file - custom modifications are made to the latest AUVSI SUAS Interop and pushed to AAV's Docker Hub. For full steps as to how to run the modifications, please see the following [steps](https://docs.google.com/spreadsheets/u/1/d/19mjOYNVK9p9t9GF8WmlmqMOV-TGl6wsb1qi4te709V4/edit?usp=drive_web&ouid=103418167026044020491). This automated process should be run every time a the base AUVSI SUAS Interop has been updated by the competition.
 
-General Interop Documentation: https://github.com/auvsi-suas/interop
+The following modifications are currently made to the system:
+- Altitude to AGL Altitude + 22' (See Changes to mavlink_proxy.py)
 
-Link to Docker Modification Steps: https://docs.google.com/spreadsheets/u/1/d/19mjOYNVK9p9t9GF8WmlmqMOV-TGl6wsb1qi4te709V4/edit?usp=drive_web&ouid=103418167026044020491
+**Connceting to Interoperability (Competition)**
+
+**Connecting to Interoperability (HITL Testing)**
+
+**Connecting to Interoperability (SITL Testing)**
 
 Link to Connecting to Interop Steps: https://docs.google.com/document/u/1/d/1K8JhXIW9-weg4ZLH8XjKiC9EUNEVvPcUT6Bc2LuULR4/edit?usp=drive_web&ouid=103418167026044020491
