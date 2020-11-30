@@ -1,3 +1,5 @@
+#Simple simulated drone initiation.
+
 import dronekit_sitl
 from time import sleep
 
