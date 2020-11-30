@@ -7,7 +7,7 @@ This repository includes all the files used in addition to the base AUVSI SUAS I
 By running the deploy.bat file - custom modifications are made to the latest AUVSI SUAS Interop and pushed to AAV's Docker Hub. This automated process should be run every time a the base AUVSI SUAS Interop has been updated by the competition.
 
 The following modifications are currently made to the system:
-- MSL Altitude to AGL Altitude + 22' (See Changes to mavlink_proxy.py)
+- MSL Altitude to AGL Altitude + 22' (Modified mavlink_proxy.py)
 
 ## Connecting to Interoperability
 There are three ways to connect to interop based on the resources at hand: SITL or HITL. Altough similar, each setup process has been detailed below.
