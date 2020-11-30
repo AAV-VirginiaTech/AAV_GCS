@@ -4,7 +4,7 @@ This repository includes all the files used in addition to the base AUVSI SUAS I
 
 ## Modifications to Base Client Script
 
-By running the deploy.bat file - custom modifications are made to the latest AUVSI SUAS Interop and pushed to AAV's Docker Hub. This automated process should be run every time a the base AUVSI SUAS Interop has been updated by the competition.
+By running the modify.bat file - custom modifications are made to the latest AUVSI SUAS Interop and pushed to AAV's Docker Hub. This automated process should be run every time a the base AUVSI SUAS Interop has been updated by the competition.
 
 The following modifications are currently made to the system:
 - MSL Altitude to AGL Altitude + 22' (Modified mavlink_proxy.py)
