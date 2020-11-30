@@ -89,7 +89,7 @@ class MavlinkProxy(object):
     @classmethod
     def _mavlink_alt(cls, dist):
         """Converts a MAVLink packet millimeter format to decimal feet."""
-        return ((dist * 0.00328084)+22.00)
+        return ((dist * 0.00328084)+22)
 
     @classmethod
     def _mavlink_heading(cls, heading):
