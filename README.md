@@ -12,7 +12,7 @@ The following modifications are currently made to the system:
 ## Connecting to Interoperability
 There are three ways to connect to interop based on the resources at hand: SITL or HITL. Altough similar, each setup process has been detailed below.
 
-### Connecting to Interoperability (HITL)
+#### Connecting to Interoperability (HITL)
 
 The following script can be used to connect to interop and begin streaming information to the server with a UAV:
 ```
@@ -22,7 +22,7 @@ sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USE
 connect mission planner to 10.10.130.99:14551
 ```
 
-### Connecting to Interoperability (SITL)
+##### Connecting to Interoperability (SITL)
 
 The following script can be used to connect to interop and begin streaming information to the server with a **simulated** UAV:
 ```
