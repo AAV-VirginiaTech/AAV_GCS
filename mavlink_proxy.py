@@ -58,7 +58,7 @@ class MavlinkProxy(object):
             telemetry = Telemetry()
             telemetry.latitude = self._mavlink_latlon(msg.lat)
             telemetry.longitude = self._mavlink_latlon(msg.lon)
-            telemetry.altitude = self._mavlink_alt(msg.relative_alt)
+            telemetry.altitude = self._mavlink_alt(msg.relative_alt) #sending AGL alt instead of MSL alt
             telemetry.heading = self._mavlink_heading(msg.hdg)
             # Forward via client.
             self.client.post_telemetry(telemetry).add_done_callback(
@@ -92,7 +92,7 @@ class MavlinkProxy(object):
     @classmethod
     def _mavlink_alt(cls, dist):
         """Converts a MAVLink packet millimeter format to decimal feet."""
-        return ((dist * 0.00328084)+22)
+        return ((dist * 0.00328084)+22) #adding 22' based on competition site MSL altitude
 
     @classmethod
     def _mavlink_heading(cls, heading):
