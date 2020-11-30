@@ -11,23 +11,25 @@ The following modifications are currently made to the system:
 
 
 ## Connecting to Interoperability
-There are three ways to connect to interop based on the given environment: competition, HITL, SITL. Altough similar, each setup process has been detailed below.
+There are three ways to connect to interop based on the resources at hand: SITL or HITL. Altough similar, each setup process has been detailed below.
 
-**Connecting to Interoperability (Competition)**
+**Connecting to Interoperability (HITL)**
 
-The following lines can be used to connect to interop and begin streaming information to the server at competition:
+The following script can be used to connect to interop and begin streaming information to the server with a UAV:
 ```
+sudo python mavproxy.py --master=/dev/ttyUSB# --out=udp:127.0.0.1:14550 --out=udpout:10.10.130.99:14551
 sudo docker run --net=host --interactive --tty aavvt/interop:latest
-sudo python ./tools/interop_cli.py --url http://10.10.130.10:80 --username USERNAME --password PASSWORD mission --mission_id MISSION_ID
-sudo python mavproxy.py --master=/dev/ttyUSB# --out=udp:127.0.0.1:14550 --out=udpout:10.10.130.93:14551
-sudo python ./tools/interop_cli.py --url http://10.10.130.10:80 --username virginiatech --password 3391799053 mavlink --device 127.0.0.1:14550
+sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USERNAME --password PASSWORD mission mavlink --device 127.0.0.1:14550 --mission_id MISSION_ID
+connect mission planner to 10.10.130.99:14551
 ```
 
+**Connecting to Interoperability (SITL)**
 
-
-
-**Connecting to Interoperability (HITL Testing)**
-
-**Connecting to Interoperability (SITL Testing)**
-
-Link to Connecting to Interop Steps: https://docs.google.com/document/u/1/d/1K8JhXIW9-weg4ZLH8XjKiC9EUNEVvPcUT6Bc2LuULR4/edit?usp=drive_web&ouid=103418167026044020491
+The following script can be used to connect to interop and begin streaming information to the server with a simulated UAV:
+```
+sudo python Sim_Drone.py
+sudo python mavproxy.py --master=tcp:127.0.0.1:5760 --out=udp:127.0.0.1:14550 --out=udpout:10.10.130.99:14551
+sudo docker run --net=host --interactive --tty aavvt/interop:latest
+sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USERNAME --password PASSWORD mission mavlink --device 127.0.0.1:14550 --mission_id MISSION_ID
+connect mission planner to 10.10.130.99:14551
+```
