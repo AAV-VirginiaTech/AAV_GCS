@@ -1,4 +1,4 @@
-# Team Specific Files for Interop Integration
+# AAV's Files for Interop Integration
 This repository includes all the files used in addition to the base AUVSI SUAS Interoperabilty System (Interop). AAV only makes modifications to the client side and uses an unmodified version of the server side for all integration testing. The base AUVSI SUAS Interop documentation can be found [here](https://github.com/auvsi-suas/interop).
 
 
