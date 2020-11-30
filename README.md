@@ -12,7 +12,7 @@ The following modifications are currently made to the system:
 ## Connecting to Interoperability
 There are three ways to connect to interop based on the resources at hand: SITL or HITL. Altough similar, each setup process has been detailed below.
 
-#### Connecting to Interoperability (HITL)
+### Connecting to Interoperability (HITL)
 
 The following script can be used to connect to interop and begin streaming information to the server with a UAV:
 ```
