@@ -7,9 +7,23 @@ This repository includes all the files used in addition to the base AUVSI SUAS I
 By running the deploy.bat file - custom modifications are made to the latest AUVSI SUAS Interop and pushed to AAV's Docker Hub. For full steps as to how to run the modifications, please see the following [steps](https://docs.google.com/spreadsheets/u/1/d/19mjOYNVK9p9t9GF8WmlmqMOV-TGl6wsb1qi4te709V4/edit?usp=drive_web&ouid=103418167026044020491). This automated process should be run every time a the base AUVSI SUAS Interop has been updated by the competition.
 
 The following modifications are currently made to the system:
-- Altitude to AGL Altitude + 22' (See Changes to mavlink_proxy.py)
+- MSL Altitude to AGL Altitude + 22' (See Changes to mavlink_proxy.py)
 
 **Connceting to Interoperability (Competition)**
+The following lines can be used to connect to interop and begin streaming information to the server at competition:
+
+```sudo docker run --net=host --interactive --tty aavvt/interop:latest
+sudo python ./tools/interop_cli.py --url http://10.10.130.10:80 --username USERNAME --password PASSWORD mission --mission_id MISSION_ID```
+
+*Open a New Terminal and CD to the MavProxy Directory*
+
+```sudo python mavproxy.py --master=/dev/ttyUSB# --out=udp:127.0.0.1:14550 --out=udpout:10.10.130.93:14551```
+
+*Return to the Interop Script Terminal*
+
+```sudo python ./tools/interop_cli.py --url http://10.10.130.10:80 --username virginiatech --password 3391799053 mavlink --device 127.0.0.1:14550```
+
+
 
 **Connecting to Interoperability (HITL Testing)**
 
