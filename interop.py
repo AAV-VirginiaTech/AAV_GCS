@@ -1,3 +1,5 @@
+#Base file for taking interop data output and converting to mission planner files.
+
 mission = input("Paste mission output:")
 template = '{0:d}\t{1:d}\t{2:d}\t{3:d}\t{4:.8f}\t{5:.8f}\t{6:.8f}\t{7:.8f}\t{8:.8f}\t{9:.8f}\t{10:.8f}\t{11:d}\n'
 
