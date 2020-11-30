@@ -16,20 +16,18 @@ There are three ways to connect to interop based on the given environment: compe
 **Connecting to Interoperability (Competition)**
 The following lines can be used to connect to interop and begin streaming information to the server at competition:
 
-```sudo docker run --net=host --interactive --tty aavvt/interop:latest
+sudo docker run --net=host --interactive --tty aavvt/interop:latest
 
 sudo python ./tools/interop_cli.py --url http://10.10.130.10:80 --username USERNAME --password PASSWORD mission --mission_id MISSION_ID
-```
 
 *Open a New Terminal and CD to the MavProxy Directory*
 
-```sudo python mavproxy.py --master=/dev/ttyUSB# --out=udp:127.0.0.1:14550 --out=udpout:10.10.130.93:14551
-```
+sudo python mavproxy.py --master=/dev/ttyUSB# --out=udp:127.0.0.1:14550 --out=udpout:10.10.130.93:14551
 
 *Return to the Interop Script Terminal*
 
-```sudo python ./tools/interop_cli.py --url http://10.10.130.10:80 --username virginiatech --password 3391799053 mavlink --device 127.0.0.1:14550
-```
+sudo python ./tools/interop_cli.py --url http://10.10.130.10:80 --username virginiatech --password 3391799053 mavlink --device 127.0.0.1:14550
+
 
 
 
