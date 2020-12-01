@@ -59,31 +59,31 @@ file = open("UAV_mission.waypoints",'w+')
 
 #setting home locations and takeoff for UAV
 file.write("QGC WPL 110\n")
-file.write(template.format(0, 0, 0, 16, 0, 0, 0, 0, 38.145228, -76.426905, 35.000000, 1))
-file.write(template.format(1, 0, 0, 22, 0, 0, 0, 0, 0, 0, 0, 1))
+file.write(template.format(0, 0, 0, 16, 0, 0, 0, 0, 38.145228, -76.426905, 0, 1))
+file.write(template.format(1, 0, 3, 22, 0, 0, 0, 0, 0, 0, 30.000000, 1))
 
 #addition target waypoints to UAV mission
-n = 2 #two lines before for home location and takeoff
+n = 0 #two lines before for home location and takeoff
 waypoints = mission["waypoints"]
 for waypoint in waypoints:
   latitude = mission["waypoints"][n]['latitude']
   longitude = mission["waypoints"][n]['longitude']
   altitude = ((mission["waypoints"][n]['altitude'])-22)/3.28084
-  line = template.format(n, 0, 0, 16, 2, 0, 0, 0, latitude, longitude, altitude, 1,)  
+  line = template.format(n+2, 0, 3, 16, 0, 0, 0, 0, latitude, longitude, altitude, 1,)  
   file.write(line)
   n = n+1
 
 #adding in airdrop to UAV mission
 airdrop_lat = mission["airDropPos"]['latitude']
 airdrop_long = mission["airDropPos"]['longitude']
-file.write(template.format(n, 0, 0, 16, 3.00000000, 0.00000000, 0.00000000, 0.00000000, airdrop_lat, airdrop_long, 25.908000, 1)) #fly to airdrop location
-file.write(template.format(n+1, 0, 0, 183, 11.00000000, 1900.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.000000, 1)) #servo trigger for release
-file.write(template.format(n+2,	0, 0, 183, 10.00000000, 900.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.000000, 1)) #start winch lowering
-file.write(template.format(n+3,	0, 0, 19, 20.00000000, 0.00000000, 0.00000000, 0.00000000, airdrop_lat, airdrop_long, 25.908000, 1)) #wait over location for delivery
-file.write(template.format(n+4,	0, 0, 183, 10.00000000, 1500.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.000000, 1)) #real back winch
-file.write(template.format(n+5,	0, 0, 19, 20.00000000, 0.00000000, 0.00000000, 0.00000000, airdrop_lat, airdrop_long, 25.908000, 1)) #wait over location for real back
-
-#file.write(template.format(n+8,	0, 0, 20, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.000000, 1)) #end mission with rtl
+file.write(template.format(n, 0, 3, 16, 3.00000000, 0.00000000, 0.00000000, 0.00000000, airdrop_lat, airdrop_long, 25.908000, 1)) #fly to airdrop location
+file.write(template.format(n+1, 0, 3, 183, 11.00000000, 1900.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.000000, 1)) #servo trigger for release
+file.write(template.format(n+2,	0, 3, 183, 10.00000000, 900.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.000000, 1)) #start winch lowering
+file.write(template.format(n+3,	0, 3, 16, 20.00000000, 0.00000000, 0.00000000, 0.00000000, airdrop_lat, airdrop_long, 25.908000, 1)) #wait over location for delivery
+file.write(template.format(n+4,	0, 3, 183, 10.00000000, 2100.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.000000, 1)) #real back winch
+file.write(template.format(n+6,	0, 3, 16, 20.00000000, 0.00000000, 0.00000000, 0.00000000, airdrop_lat, airdrop_long, 25.908000, 1)) #wait over location for real back
+file.write(template.format(n+5,	0, 3, 183, 10.00000000, 1500.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.000000, 1)) #stop winch
+#file.write(template.format(n+8,	0, 3, 20, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.000000, 1)) #end mission with rtl
 
 file.close() #close UAV mission file
 
@@ -95,7 +95,7 @@ file.write("QGC WPL 110\n")
 ugv_lat = mission["ugvDrivePos"]['latitude']
 ugv_long = mission["ugvDrivePos"]['longitude']
 
-file.write(template.format(0, 1, 0, 16, 0, 0, 0, 0, 38.1457952748988, -76.4263674616814, 0.15, 1))
+file.write(template.format(0, 1, 3, 16, 0, 0, 0, 0, 38.1457952748988, -76.4263674616814, 0, 1))
 file.write(template.format(1, 0, 3, 16, 0, 0, 0, 0, ugv_lat, ugv_long, 0, 1))
 
-file.close #close UGV mission file
+file.close() #close UGV mission file
