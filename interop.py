@@ -87,6 +87,7 @@ file.write(template.format(n+5,	0, 3, 183, 10.00000000, 1500.00000000, 0.0000000
 
 file.close() #close UAV mission file
 
+
 #UGV mission file creation
 n = 0
 file = open("UGV_mission.waypoints", "w+")
