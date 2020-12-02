@@ -1,16 +1,16 @@
-#Base file for taking interop data output and converting to mission planner files. Three files are outputted: fence, search area, and mission.
+#Base file for taking interop data output and converting to mission planner files. Four files are outputted: UAV_fence, search_area, UAV_mission, and UGV_mission.
 mission = input("Paste mission output:")
 template = '{0:d}\t{1:d}\t{2:d}\t{3:d}\t{4:.8f}\t{5:.8f}\t{6:.8f}\t{7:.8f}\t{8:.8f}\t{9:.8f}\t{10:.8f}\t{11:d}\n'
 
 
-#UAV fence file creation(geofence + obstacles)
+#UAV_fence creation(geofence + obstacles)
 n=0
 obstacles = mission["stationaryObstacles"]
 file = open("UAV_fence.waypoints",'w+') 
 
 file.write("QGC WPL 110\n") #base start
 
-#integrating obstacles to uav fence file
+#integrating obstacles to UAV_fence
 for obstacle in obstacles:
   latitude = mission["stationaryObstacles"][n]['latitude']
   longitude = mission["stationaryObstacles"][n]['longitude']
@@ -19,7 +19,7 @@ for obstacle in obstacles:
   file.write(template.format(n, 0, 3, 5004, radius, 0, 0, 0, latitude, longitude, height, 1,))  
   n = n+1
 
-#integrating geofence to uav fence file
+#integrating geofence to UAV_fence
 file.write(template.format(n, 0, 3, 5001, 12, 0.00000000, 0.00000000, 0.00000000, 38.1462694444444, -76.4281638888889, 0.0, 1))
 file.write(template.format(n+1, 0, 3, 5001, 12, 0.00000000, 0.00000000, 0.00000000, 38.151625, -76.4286833333333, 0.0, 1))
 file.write(template.format(n+2, 0, 3, 5001, 12, 0.00000000, 0.00000000, 0.00000000, 38.1518888888889, -76.4314666666667, 0.0, 1))
@@ -33,12 +33,12 @@ file.write(template.format(n+9, 0, 3, 5001, 12, 0.00000000, 0.00000000, 0.000000
 file.write(template.format(n+10, 0, 3, 5001, 12, 0.00000000, 0.00000000, 0.00000000, 38.1473472222222, -76.4232111111111, 0.0, 1))
 file.write(template.format(n+11, 0, 3, 5001, 12, 0.00000000, 0.00000000, 0.00000000, 38.1461305555556, -76.4266527777778, 0.0, 1))
 
-file.close() #close uav file
+file.close() #close UAV_fence
 
 
-#creation of search area file
+#creation of search_area
 n = 0
-file = open("searcharea.poly", "w+")
+file = open("search_area.poly", "w+")
 file.write("#saved by Mission Planner 1.3.70")
 
 boundaries = mission["searchGridPoints"]
@@ -51,18 +51,18 @@ for boundary in boundaries:
   file.write('\n')
   n = n+1
   
-file.close() #close search area file
+file.close() #close search_area
 
 
-#uav mission file creation(waypoints + airdrop)
+#UAV_mission creation(waypoints + airdrop)
 file = open("UAV_mission.waypoints",'w+') 
 
-#setting home locations and takeoff for UAV
+#setting home locations and takeoff altitude for UAV
 file.write("QGC WPL 110\n")
 file.write(template.format(0, 0, 0, 16, 0, 0, 0, 0, 38.145228, -76.426905, 0, 1))
 file.write(template.format(1, 0, 3, 22, 0, 0, 0, 0, 0, 0, 30.000000, 1))
 
-#addition target waypoints to UAV mission
+#addition target waypoints to UAV_mission
 n = 0 #two lines before for home location and takeoff
 waypoints = mission["waypoints"]
 for waypoint in waypoints:
@@ -73,7 +73,7 @@ for waypoint in waypoints:
   file.write(line)
   n = n+1
 
-#adding in airdrop to UAV mission
+#adding airdrop to UAV_mission
 airdrop_lat = mission["airDropPos"]['latitude']
 airdrop_long = mission["airDropPos"]['longitude']
 file.write(template.format(n, 0, 3, 16, 3.00000000, 0.00000000, 0.00000000, 0.00000000, airdrop_lat, airdrop_long, 25.908000, 1)) #fly to airdrop location
@@ -85,10 +85,10 @@ file.write(template.format(n+6,	0, 3, 16, 20.00000000, 0.00000000, 0.00000000, 0
 file.write(template.format(n+5,	0, 3, 183, 10.00000000, 1500.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.000000, 1)) #stop winch
 #file.write(template.format(n+8,	0, 3, 20, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.000000, 1)) #end mission with rtl
 
-file.close() #close UAV mission file
+file.close() #close UAV_mission
 
 
-#UGV mission file creation
+#UGV_mission creation
 n = 0
 file = open("UGV_mission.waypoints", "w+")
 file.write("QGC WPL 110\n")
@@ -99,4 +99,4 @@ ugv_long = mission["ugvDrivePos"]['longitude']
 file.write(template.format(0, 1, 3, 16, 0, 0, 0, 0, 38.1457952748988, -76.4263674616814, 0, 1))
 file.write(template.format(1, 0, 3, 16, 0, 0, 0, 0, ugv_lat, ugv_long, 0, 1))
 
-file.close() #close UGV mission file
+file.close() #close UGV_mission
