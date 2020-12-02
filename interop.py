@@ -1,4 +1,5 @@
-#Base file for taking interop data output and converting to mission planner files. Four files are outputted: UAV_fence, search_area, UAV_mission, and UGV_mission.
+#Base file for taking interop data output and converting to mission planner files. Five files are outputted: UAV_fence, mapping, search_area, UAV_mission, and UGV_mission.
+import math
 mission = input("Paste mission output:")
 template = '{0:d}\t{1:d}\t{2:d}\t{3:d}\t{4:.8f}\t{5:.8f}\t{6:.8f}\t{7:.8f}\t{8:.8f}\t{9:.8f}\t{10:.8f}\t{11:d}\n'
 
@@ -36,7 +37,7 @@ file.write(template.format(n+11, 0, 3, 5001, 12, 0.00000000, 0.00000000, 0.00000
 file.close() #close UAV_fence
 
 
-#creation of search area file
+#creation of mapping file
 n = 0
 map_height = mission["mapHeight"]/3.28084
 map_width = ((16.0/9.0)*map_height)
@@ -47,31 +48,37 @@ map_north_lat = map_cent_lat + (map_height/(2*111111.0))
 map_south_lat = map_cent_lat - (map_height/(2*111111.0))
 map_east_long = map_cent_long + ((map_width/2)/math.cos(math.radians(map_cent_lat))/111000.0)
 map_west_long = map_cent_long - ((map_width/2)/math.cos(math.radians(map_cent_lat))/111000.0)
-file = open("searcharea.poly", "w+")
-file.write("#saved by Mission Planner 1.3.70" + '\n')
 
-boundaries = mission["searchGridPoints"]
-#for boundary in boundaries:
-#  latitude = mission["searchGridPoints"][n]['latitude']
-#  longitude = mission["searchGridPoints"][n]['longitude'] 
-#  file.write(str(latitude))
-#  file.write(' ')
-#  file.write(str(longitude))
-#  file.write('\n')
-#  n = n+1
+file = open("mapping.poly", "w+")
+file.write("#saved by Mission Planner 1.3.70" + '\n')
 
 file.write(str(map_north_lat) + ' ' + str(map_east_long) + '\n')
 file.write(str(map_north_lat) + ' ' + str(map_west_long) + '\n')
 file.write(str(map_south_lat) + ' ' + str(map_west_long) + '\n')
 file.write(str(map_south_lat) + ' ' + str(map_east_long) + '\n')
   
-file.close() #close search area file
+file.close() #close mapping
+
+
+#creation of search_area
+n = 0
+file = open("search_area.poly", "w+")
+file.write("#saved by Mission Planner 1.3.70" + '\n')
+
+boundaries = mission["searchGridPoints"]
+for boundary in boundaries:
+  latitude = mission["searchGridPoints"][n]['latitude']
+  longitude = mission["searchGridPoints"][n]['longitude'] 
+  file.write(str(latitude) + ' ' + str(longitude) + '\n')
+  n = n+1
+
+file.close() #close search_area
 
 
 #UAV_mission creation(waypoints + airdrop)
 file = open("UAV_mission.waypoints",'w+') 
 
-#setting home locations and takeoff altitude for UAV
+#setting home locations and takeoff for UAV
 file.write("QGC WPL 110\n")
 file.write(template.format(0, 0, 0, 16, 0, 0, 0, 0, 38.145228, -76.426905, 0, 1))
 file.write(template.format(1, 0, 3, 22, 0, 0, 0, 0, 0, 0, 30.000000, 1))
@@ -87,7 +94,7 @@ for waypoint in waypoints:
   file.write(line)
   n = n+1
 
-#adding airdrop to UAV_mission
+#adding in airdrop to UAV_mission
 airdrop_lat = mission["airDropPos"]['latitude']
 airdrop_long = mission["airDropPos"]['longitude']
 file.write(template.format(n, 0, 3, 16, 3.00000000, 0.00000000, 0.00000000, 0.00000000, airdrop_lat, airdrop_long, 25.908000, 1)) #fly to airdrop location
@@ -101,7 +108,6 @@ file.write(template.format(n+5,	0, 3, 183, 10.00000000, 1500.00000000, 0.0000000
 
 file.close() #close UAV_mission
 
-
 #UGV_mission creation
 n = 0
 file = open("UGV_mission.waypoints", "w+")
@@ -110,7 +116,7 @@ file.write("QGC WPL 110\n")
 ugv_lat = mission["ugvDrivePos"]['latitude']
 ugv_long = mission["ugvDrivePos"]['longitude']
 
-file.write(template.format(0, 1, 3, 16, 0, 0, 0, 0, airdrop_lat, airdrop_long, 0, 1))
+file.write(template.format(0, 1, 3, 16, 0, 0, 0, 0, 38.1457952748988, -76.4263674616814, 0, 1))
 file.write(template.format(1, 0, 3, 16, 0, 0, 0, 0, ugv_lat, ugv_long, 0, 1))
 
 file.close() #close UGV_mission
