@@ -36,22 +36,36 @@ file.write(template.format(n+11, 0, 3, 5001, 12, 0.00000000, 0.00000000, 0.00000
 file.close() #close UAV_fence
 
 
-#creation of search_area
+#creation of search area file
 n = 0
-file = open("search_area.poly", "w+")
-file.write("#saved by Mission Planner 1.3.70")
+map_height = mission["mapHeight"]/3.28084
+map_width = ((16.0/9.0)*map_height)
+map_cent_lat = mission["mapCenterPos"]['latitude']
+map_cent_long = mission["mapCenterPos"]['longitude']
+
+map_north_lat = map_cent_lat + (map_height/(2*111111.0))
+map_south_lat = map_cent_lat - (map_height/(2*111111.0))
+map_east_long = map_cent_long + ((map_width/2)/math.cos(math.radians(map_cent_lat))/111000.0)
+map_west_long = map_cent_long - ((map_width/2)/math.cos(math.radians(map_cent_lat))/111000.0)
+file = open("searcharea.poly", "w+")
+file.write("#saved by Mission Planner 1.3.70" + '\n')
 
 boundaries = mission["searchGridPoints"]
-for boundary in boundaries:
-  latitude = mission["searchGridPoints"][n]['latitude']
-  longitude = mission["searchGridPoints"][n]['longitude'] 
-  file.write(str(latitude))
-  file.write(' ')
-  file.write(str(longitude))
-  file.write('\n')
-  n = n+1
+#for boundary in boundaries:
+#  latitude = mission["searchGridPoints"][n]['latitude']
+#  longitude = mission["searchGridPoints"][n]['longitude'] 
+#  file.write(str(latitude))
+#  file.write(' ')
+#  file.write(str(longitude))
+#  file.write('\n')
+#  n = n+1
+
+file.write(str(map_north_lat) + ' ' + str(map_east_long) + '\n')
+file.write(str(map_north_lat) + ' ' + str(map_west_long) + '\n')
+file.write(str(map_south_lat) + ' ' + str(map_west_long) + '\n')
+file.write(str(map_south_lat) + ' ' + str(map_east_long) + '\n')
   
-file.close() #close search_area
+file.close() #close search area file
 
 
 #UAV_mission creation(waypoints + airdrop)
