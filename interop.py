@@ -96,7 +96,7 @@ file.write("QGC WPL 110\n")
 ugv_lat = mission["ugvDrivePos"]['latitude']
 ugv_long = mission["ugvDrivePos"]['longitude']
 
-file.write(template.format(0, 1, 3, 16, 0, 0, 0, 0, 38.1457952748988, -76.4263674616814, 0, 1))
+file.write(template.format(0, 1, 3, 16, 0, 0, 0, 0, airdrop_lat, airdrop_long, 0, 1))
 file.write(template.format(1, 0, 3, 16, 0, 0, 0, 0, ugv_lat, ugv_long, 0, 1))
 
 file.close() #close UGV_mission
