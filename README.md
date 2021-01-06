@@ -2,13 +2,6 @@
 This repository includes all the files used in addition to the base AUVSI SUAS Interoperabilty System (Interop). AAV only makes modifications to the client side and uses an unmodified version of the server side for all integration testing. The base AUVSI SUAS Interop documentation can be found [here](https://github.com/auvsi-suas/interop).
 
 
-## Modifications to Base Client Script
-
-By running the modify.bat file - custom modifications are made to the latest AUVSI SUAS Interop and pushed to AAV's Docker Hub. This automated process should be run every time a the base AUVSI SUAS Interop has been updated by the competition.
-
-The following modifications are currently made to the system:
-- MSL Altitude to AGL Altitude + 22' (Modified mavlink_proxy.py)
-
 ## Connecting to Interoperability
 There are three ways to connect to interop based on the resources at hand: SITL or HITL. Altough similar, each setup process has been detailed below.
 
@@ -32,3 +25,9 @@ sudo docker run --net=host --interactive --tty aavvt/interop:latest
 sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USERNAME --password PASSWORD mission mavlink --device 127.0.0.1:14550 --mission_id MISSION_ID
 connect mission planner to 10.10.130.99:14551
 ```
+
+## Modifications to Base Client Script
+
+By running the modify.bat file - custom modifications are made to the latest AUVSI SUAS Interop and pushed to AAV's Docker Hub. This automated process should be run every time a the base AUVSI SUAS Interop has been updated by the competition.
+
+There are currently no modifications being made by AAV to the base AUVSI SUAS Interop. However, in the past AAV has been required to make slight changes. Thus, the process for implementing these changes still resides in this documentation.
