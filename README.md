@@ -3,7 +3,7 @@ This repository includes all the files used in addition to the base AUVSI SUAS I
 
 
 ## Connecting to Interoperability
-There are three ways to connect to interop based on the resources at hand: SITL or HITL. Altough similar, each setup process has been detailed below.
+There are three ways to connect to interop based on the resources at hand: SITL or HITL. Altough similar, each setup process has been detailed below. Docker Desktop must be running prior to running any of the following scripts.
 
 #### Connecting to Interoperability (HITL)
 
