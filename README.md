@@ -3,11 +3,11 @@ This repository includes all the files used in addition to the base AUVSI SUAS I
 
 
 ## Connecting to Interoperability
-There are three ways to connect to interop based on the resources at hand: SITL or HITL. Altough similar, each setup process has been detailed below. Docker Desktop must be running prior to running any of the following scripts.
+There are two ways to connect to interop based on the resources at hand: SITL or HITL. Docker Desktop must be running prior to running any of the following scripts.
 
 #### Connecting to Interoperability (HITL)
 
-The following script can be used to connect to interop and begin streaming information to the server with a UAV:
+The following script can be used to connect to Interop and begin streaming information to the server with a UAV:
 ```
 sudo python mavproxy.py --master=/dev/ttyUSB# --out=udp:127.0.0.1:14550 --out=udp:10.10.130.99:14551
 sudo docker run --net=host --interactive --tty aavvt/interop:latest
@@ -17,7 +17,7 @@ connect mission planner to 10.10.130.99:14551
 
 #### Connecting to Interoperability (SITL)
 
-The following script can be used to connect to interop and begin streaming information to the server with a **simulated** UAV:
+The following script can be used to connect to Interop and begin streaming information to the server with a **simulated** UAV:
 ```
 sudo python Sim_Drone.py
 sudo python mavproxy.py --master=tcp:127.0.0.1:5760 --out=udp:127.0.0.1:14550 --out=udp:10.10.130.99:14551
