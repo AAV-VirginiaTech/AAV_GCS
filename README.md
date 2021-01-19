@@ -9,7 +9,7 @@ There are two ways to connect to interop based on the resources at hand: SITL or
 
 The following script can be used to connect to Interop and begin streaming information to the server with a UAV:
 ```
-sudo python mavproxy.py --master=/dev/ttyUSB# --out=udp:127.0.0.1:14550 --out=udp:10.10.130.99:14551
+mavproxy.py --master=/dev/ttyUSB# --out=udp:127.0.0.1:14550 --out=udp:10.10.130.99:14551
 sudo docker run --net=host --interactive --tty aavvt/interop:latest
 sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USERNAME --password PASSWORD mission mavlink --device 127.0.0.1:14550 --mission_id MISSION_ID
 connect mission planner to 10.10.130.99:14551
@@ -20,7 +20,7 @@ connect mission planner to 10.10.130.99:14551
 The following script can be used to connect to Interop and begin streaming information to the server with a **simulated** UAV:
 ```
 sudo python Sim_Drone.py
-sudo python mavproxy.py --master=tcp:127.0.0.1:5760 --out=udp:127.0.0.1:14550 --out=udp:10.10.130.99:14551
+mavproxy.py --master=tcp:127.0.0.1:5760 --out=udp:127.0.0.1:14550 --out=udp:10.10.130.99:14551
 sudo docker run --net=host --interactive --tty aavvt/interop:latest
 sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USERNAME --password PASSWORD mission mavlink --device 127.0.0.1:14550 --mission_id MISSION_ID
 connect mission planner to 10.10.130.99:14551
