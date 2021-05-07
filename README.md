@@ -7,7 +7,7 @@ This repository includes all the files used in addition to the base AUVSI SUAS I
 ## Interacting with Interoperability
 There are two ways to connect to interop based on the resources at hand: SITL or HITL. Docker must be running prior to running any of the following scripts. Additional lines for submitting information regarding the ODCL amd Mapping tasks are also shown.
 
-#### Connecting to Interoperability (HITL)
+### Connecting to Interoperability (HITL)
 
 The following script can be used to connect to Interop and begin streaming aircraft information to the server with a UAV:
 ```
@@ -17,7 +17,7 @@ sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USE
 connect mission planner to 10.10.130.99:14551
 ```
 
-#### Connecting to Interoperability (SITL)
+### Connecting to Interoperability (SITL)
 
 The following script can be used to connect to Interop and begin streaming aircraft information to the server with a **simulated** UAV:
 ```
@@ -28,7 +28,7 @@ sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USE
 connect mission planner to 10.10.130.99:14551
 ```
 
-#### Submitting Data to Interoperability (SITL)
+### Submitting Data to Interoperability (SITL)
 
 The following line is used to submit **aircraft data** to the server:
 ```
