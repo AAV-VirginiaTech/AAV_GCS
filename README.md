@@ -4,28 +4,43 @@ This repository includes all the files used in addition to the base AUVSI SUAS I
 - [Docker](https://docs.docker.com/get-started/)
 - [Mavproxy](https://ardupilot.org/mavproxy/docs/getting_started/download_and_installation.html#)
 
-## Connecting to Interoperability
-There are two ways to connect to interop based on the resources at hand: SITL or HITL. Docker Desktop must be running prior to running any of the following scripts.
+## Interacting with Interoperability
+There are two ways to connect to interop based on the resources at hand: SITL or HITL. Docker must be running prior to running any of the following scripts. Additional lines for submitting information regarding the ODCL amd Mapping tasks are also shown.
 
 #### Connecting to Interoperability (HITL)
 
-The following script can be used to connect to Interop and begin streaming information to the server with a UAV:
+The following script can be used to connect to Interop and begin streaming aircraft information to the server with a UAV:
 ```
 mavproxy.py --master=/dev/ttyUSB# --out=udp:127.0.0.1:14550 --out=udp:10.10.130.99:14551
 sudo docker run --net=host --interactive --tty aavvt/interop:latest
-sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USERNAME --password PASSWORD mission mavlink --device 127.0.0.1:14550 --mission_id MISSION_ID
+sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USERNAME --password PASSWORD mission --mission_id MISSION_ID
 connect mission planner to 10.10.130.99:14551
 ```
 
 #### Connecting to Interoperability (SITL)
 
-The following script can be used to connect to Interop and begin streaming information to the server with a **simulated** UAV:
+The following script can be used to connect to Interop and begin streaming aircraft information to the server with a **simulated** UAV:
 ```
 sudo python Sim_Drone.py
 mavproxy.py --master=tcp:127.0.0.1:5760 --out=udp:127.0.0.1:14550 --out=udp:10.10.130.99:14551
 sudo docker run --net=host --interactive --tty aavvt/interop:latest
-sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USERNAME --password PASSWORD mission mavlink --device 127.0.0.1:14550 --mission_id MISSION_ID
+sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USERNAME --password PASSWORD mission --mission_id MISSION_ID
 connect mission planner to 10.10.130.99:14551
+```
+
+#### Submitting Data to Interoperability (SITL)
+
+The following line is used to submit **aircraft data** to the server:
+```
+sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USERNAME --password PASSWORD --mission_id MISSION_ID mavlink --device 127.0.0.1:14550
+```
+The following line is used to submit **ODLC data** to the server:
+```
+sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USERNAME --password PASSWORD --mission_id MISSION_ID odlcs --odlc_dir /PATH/TO/OBJECT/DIRECTORY
+```
+The following line is used to submit your **final map** to the server: 
+```
+sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USERNAME --password PASSWORD --mission_id MISSION_ID map --map_filepath /PATH/TO/MAP/DIRECTORY
 ```
 
 ## Updating AAV's Docker Hub Image
