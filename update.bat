@@ -2,5 +2,5 @@
 
 #!/bin/bash
 
-docker build -t aavvt/interop:latest .
+docker build -t auvsisuas/interop-client:latest .
 docker push aavvt/interop:latest
