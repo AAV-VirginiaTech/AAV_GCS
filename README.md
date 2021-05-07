@@ -28,7 +28,7 @@ sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USE
 connect mission planner to 10.10.130.99:14551
 ```
 
-### Submitting Data to Interoperability (SITL)
+### Submitting Data to Interoperability
 
 The following line is used to submit **aircraft data** to the server:
 ```
