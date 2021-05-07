@@ -28,6 +28,10 @@ sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USE
 connect mission planner to 10.10.130.99:14551
 ```
 
+### Converting Mission Data
+
+Once the mission data is received, run the interop.py file and paste in the mission data dictionary. This just result in multiple files that can be uploaded to mission planner.
+
 ### Submitting Data to Interoperability
 
 The following line is used to submit **aircraft data** to the server:
@@ -54,4 +58,4 @@ There are currently no modifications being made by AAV to the base AUVSI SUAS In
 
 - When you receive interopeability details at checkin (INTEROP_SERVER_IP, USERNAME, PASSWORD, etc.), copy the above lines and modify them to include the exact information. This will make server integration easier when at the flight line.
 
-- Max sure that all altitude valeus in the waypoint mission output as absolute. This should be done automatically by the python file.
+- Max sure that all altitude valeus in the waypoint mission output as absolute. This should be done automatically by the interop.py file.
