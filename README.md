@@ -1,7 +1,7 @@
 # AAV's Files for Interop Integration
 This repository includes all the files used in addition to the base AUVSI SUAS Interoperabilty System (Interop). The base AUVSI SUAS Interop documentation can be found [here](https://github.com/auvsi-suas/interop). The following programs must be installed:
 
-- Docker Desktop
+- [Docker](https://docs.docker.com/get-started/)
 - Mavproxy
 
 ## Connecting to Interoperability
