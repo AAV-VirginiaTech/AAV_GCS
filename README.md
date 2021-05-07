@@ -32,15 +32,15 @@ connect mission planner to 10.10.130.99:14551
 
 The following line is used to submit **aircraft data** to the server:
 ```
-sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USERNAME --password PASSWORD --mission_id MISSION_ID mavlink --device 127.0.0.1:14550
+sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USERNAME --mission_id MISSION_ID mavlink --device 127.0.0.1:14550
 ```
 The following line is used to submit **ODLC data** to the server:
 ```
-sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USERNAME --password PASSWORD --mission_id MISSION_ID odlcs --odlc_dir /PATH/TO/OBJECT/DIRECTORY
+sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USERNAME --mission_id MISSION_ID odlcs --odlc_dir /PATH/TO/OBJECT/DIRECTORY
 ```
 The following line is used to submit your **final map** to the server: 
 ```
-sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USERNAME --password PASSWORD --mission_id MISSION_ID map --map_filepath /PATH/TO/MAP/DIRECTORY
+sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USERNAME --mission_id MISSION_ID map --map_filepath /PATH/TO/MAP/DIRECTORY
 ```
 
 ## Updating AAV's Docker Hub Image
@@ -48,3 +48,10 @@ sudo python ./tools/interop_cli.py --url http://INTEROP_SERVER_IP --username USE
 By running the update.bat file - custom modifications are made to the latest AUVSI SUAS Interop and pushed to AAV's Docker Hub. This automated process should be run every time a the base AUVSI SUAS Interop has been updated by the competition.
 
 There are currently no modifications being made by AAV to the base AUVSI SUAS Interop. Since no modifications are currently being made, there is no crucial reasoning behind have a team-specific version of the Interop scripts. However, in the past AAV has been required to make slight changes and this may be required again in the future. Thus, the process for implementing these changes still resides in this documentation.
+
+
+## Tips and Tricks
+
+- When you receive interopeability details at checkin (INTEROP_SERVER_IP, USERNAME, PASSWORD, etc.), copy the above lines and modify them to include the exact information. This will make server integration easier when at the flight line.
+
+- Max sure that all altitude valeus in the waypoint mission output as absolute. This should be done automatically by the python file.
