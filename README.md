@@ -30,7 +30,7 @@ connect mission planner to 10.10.130.99:14551
 
 ### Converting Mission Data
 
-Once the mission data is received, run the interop.py file and paste in the mission data dictionary. This just result in multiple files that can be uploaded to mission planner.
+Once the mission data is received, run the interop.py file and paste in the mission data dictionary. This should result in multiple files that can be uploaded to mission planner.
 
 ### Submitting Data to Interoperability
 
