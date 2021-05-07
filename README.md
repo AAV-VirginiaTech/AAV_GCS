@@ -1,6 +1,8 @@
 # AAV's Files for Interop Integration
-This repository includes all the files used in addition to the base AUVSI SUAS Interoperabilty System (Interop). The base AUVSI SUAS Interop documentation can be found [here](https://github.com/auvsi-suas/interop).
+This repository includes all the files used in addition to the base AUVSI SUAS Interoperabilty System (Interop). The base AUVSI SUAS Interop documentation can be found [here](https://github.com/auvsi-suas/interop). The following programs must be installed:
 
+- Docker Desktop
+- Mavproxy
 
 ## Connecting to Interoperability
 There are two ways to connect to interop based on the resources at hand: SITL or HITL. Docker Desktop must be running prior to running any of the following scripts.
