@@ -107,7 +107,7 @@ file.close() #close UAV mission file
 
 #UGV mission file creation
 file = open("UGV_mission.waypoints", "w+")
-file.write("#saved by Mission Planner 1.3.70" + '\n')
+file.write("QGC WPL 110\n")
 
 ugv_lat = mission["ugvDrivePos"]['latitude']
 ugv_long = mission["ugvDrivePos"]['longitude']
