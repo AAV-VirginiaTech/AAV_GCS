@@ -37,7 +37,7 @@ file.close() #close uav file
 
 #creation of mapping file
 file = open("mapping.poly", "w+")
-file.write("QGC WPL 110\n")
+file.write("#saved by Mission Planner 1.3.74.1\n")
 
 map_height = mission["mapHeight"]/3.28084
 map_width = ((16.0/9.0)*map_height)
@@ -59,7 +59,7 @@ file.close() #close mapping file
 
 #creation of search area file
 file = open("searcharea.poly", "w+")
-file.write("QGC WPL 110\n")
+file.write("#saved by Mission Planner 1.3.74.1\n")
 
 n = 0          
 boundaries = mission["searchGridPoints"]
