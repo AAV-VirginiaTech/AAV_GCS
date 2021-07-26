@@ -5,7 +5,7 @@ This repository includes all the files used in addition to the base AUVSI SUAS I
 - [Mavproxy](https://ardupilot.org/mavproxy/docs/getting_started/download_and_installation.html#)
 
 ## Interacting with Interoperability
-There are two ways to connect to interop based on the resources at hand: SITL or HITL. Steps on how to run the simulator can be found here. Ensure that it is running before trying to establish a connection. Docker must be running prior to running any of the following scripts.
+There are two ways to connect to interop based on the resources at hand: SITL or HITL. Steps on how to run the simulator can be found here. Ensure that the aircraft is powered on or the simulator is running before trying to establish a connection.
 
 ### Connecting to Interoperability
 
