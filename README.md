@@ -5,11 +5,12 @@ This repository includes all the files used in addition to the base AUVSI SUAS I
 - [Mavproxy](https://ardupilot.org/mavproxy/docs/getting_started/download_and_installation.html#)
 
 ## Interacting with Interoperability
-There are two ways to connect to interop based on the resources at hand: SITL or HITL. Steps on how to run the simulator can be found here. Docker must be running prior to running any of the following scripts.
+There are two ways to connect to interop based on the resources at hand: SITL or HITL. Steps on how to run the simulator can be found here. Ensure that it is running before trying to establish a connection. Docker must be running prior to running any of the following scripts.
 
 ### Connecting to Interoperability
 
-The following script can be used to connect to Interop and retrieve mission information. When working with a simulator the --master port should be denoted as the simulation output IP address (default: tcp:127.0.0.1:5760) instead of the USB port (ttyUSB#). It is important to note that the simulator must be running prior to estabilishing a connection.
+The following script can be used to connect to Interop and retrieve mission information. When working with a simulator the --master port should be denoted as the simulation output IP address (default: tcp:127.0.0.1:5760) instead of the USB port (ttyUSB#).
+
 ```
 mavproxy.py --master=/dev/ttyUSB# --out=udp:127.0.0.1:14550 --out=udp:10.10.130.99:14551
 sudo docker run --net=host --interactive --tty aavvt/interop:latest
