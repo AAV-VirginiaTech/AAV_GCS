@@ -59,3 +59,5 @@ There are currently no modifications being made by AAV to the base AUVSI SUAS In
 - When you receive interopeability details at checkin (INTEROP_SERVER_IP, USERNAME, PASSWORD, etc.), copy the above lines and modify them to include the exact information. This will make server integration easier when at the flight line.
 
 - Max sure that all altitude values in the waypoint mission output as absolute. This should be done automatically by the interop.py file.
+
+- Simulation setup is being modified and can be found on another repo soon!
