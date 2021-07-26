@@ -9,7 +9,7 @@ There are two ways to connect to interop based on the resources at hand: SITL or
 
 ### Connecting to Interoperability
 
-The following script can be used to connect to Interop and begin streaming aircraft information to the server with a UAV. When working with a simulator the --master port should be denoted as the simulation output IP address (default: tcp:127.0.0.1:5760) instead of the USB port (ttyUSB#):
+The following script can be used to connect to Interop and retrieve mission information. When working with a simulator the --master port should be denoted as the simulation output IP address (default: tcp:127.0.0.1:5760) instead of the USB port (ttyUSB#). It is important to note that the simulator must be running prior to estabilishing a connection.
 ```
 mavproxy.py --master=/dev/ttyUSB# --out=udp:127.0.0.1:14550 --out=udp:10.10.130.99:14551
 sudo docker run --net=host --interactive --tty aavvt/interop:latest
