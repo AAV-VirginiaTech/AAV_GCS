@@ -1,5 +1,5 @@
 # AAV's Files for Interop Integration
-This repository includes all the files used in addition to the base AUVSI SUAS Interoperabilty System (Interop). The base AUVSI SUAS Interop documentation can be found [here](https://github.com/auvsi-suas/interop). The following programs must be installed:
+This repository includes all the files used in addition to the base AUVSI SUAS Interoperabilty System (Interop). The base Interop documentation can be found [here](https://github.com/auvsi-suas/interop). The following programs must be installed:
 
 - [Docker](https://docs.docker.com/get-started/)
 - [Mavproxy](https://ardupilot.org/mavproxy/docs/getting_started/download_and_installation.html#)
@@ -20,7 +20,7 @@ connect mission planner to 10.10.130.99:14551
 
 ### Converting Mission Data
 
-Once the mission data is received, run the interop.py file and paste in the mission data dictionary. This should result in multiple files that can be uploaded to mission planner.
+Once the mission data is received, run the **interop.py** file and paste in the mission data dictionary. This should result in multiple files that can be uploaded to Mission Planner.
 
 ### Submitting Data to Interoperability
 
@@ -48,6 +48,6 @@ There are currently no modifications being made by AAV to the base AUVSI SUAS In
 
 - When you receive interopeability details at checkin (INTEROP_SERVER_IP, USERNAME, PASSWORD, etc.), copy the above lines and modify them to include the exact information. This will make server integration easier when at the flight line.
 
-- Max sure that all altitude values in the waypoint mission output as absolute. This should be done automatically by the interop.py file.
+- Max sure that all **altitude** values in the waypoint mission output as **absolute**. This should be done automatically by the interop.py file.
 
 - Simulation setup is being modified and can be found on another repo soon!
