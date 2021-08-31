@@ -137,7 +137,7 @@ SERVO(10, 900) # Trigger Winch
 WP(airdrop_lat, airdrop_long, airdrop_alt, 3, 20) # Wait for Delivery
 SERVO(10, 2100) # Real Back Winch
 WP(airdrop_lat, airdrop_long, airdrop_alt, 3, 20) # Wait for Real Back
-SERVO(10, 1500) # Stop
+SERVO(10, 1500) # Stop Winch
 
 file.close() # Close File
 
