@@ -118,13 +118,13 @@ def FENCE(LAT, LONG, ALT, NUM_POINTS): # Function for FENCE Line Generation
 file = open("UAV_mission.waypoints",'w+')
 file.write("QGC WPL 110\n")  # Required Header for Waypoint Files
 
-HOME(38.145228, -76.426905) # Set Home Point (LAT, LONG)
-TKOFF(35, 0) # Set Takeoff (ALT, ALT_TYPE)
+HOME(38.145228, -76.426905) # Set Home Point
+TKOFF(35, 0) # Set Takeoff
 
 # Addition of Target Waypoints
 waypoints = mission["waypoints"]
 for waypoint in waypoints:
-    WP(waypoint['latitude'], waypoint['longitude'], waypoint['altitude']/3.28084, 0, 0) # LAT, LONG, ALT, ALT_TYPE, DELAY
+    WP(waypoint['latitude'], waypoint['longitude'], waypoint['altitude']/3.28084, 0, 0)
 
 # Addition of Airdrop Sequence
 airdrop_lat = mission["airDropPos"]['latitude']
