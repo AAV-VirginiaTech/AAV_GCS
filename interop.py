@@ -109,7 +109,7 @@ def FENCE(LAT, LONG, ALT, NUM_POINTS): # Function for FENCE Line Generation
     P7 = ALT # Altitude (m)
     AUTOCONTINUE = 1 # Continue With Auto Mission
     
-    ST_OBS.Line = template.format(ROW, CURRENT, ALT_TYPE, CMD, P1, P2, P3, P4, P5, P6, P7, AUTOCONTINUE)
+    FENCE.Line = template.format(ROW, CURRENT, ALT_TYPE, CMD, P1, P2, P3, P4, P5, P6, P7, AUTOCONTINUE)
     file.write(ST_OBS.Line)
 
 # ------------------------------------------------------------------------------------------------------------------
