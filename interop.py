@@ -8,7 +8,7 @@ template = '{0:d}\t{1:d}\t{2:d}\t{3:d}\t{4:.8f}\t{5:.8f}\t{6:.8f}\t{7:.8f}\t{8:.
 
 def WP(LAT, LONG, ALT, ALT_TYPE, DELAY): # Function for WP Command Line Generation
     ROW = 0 # Row Numbering Does Not Matter
-    CURRENT = 0 # Current = 0 for All Except Home
+    CURRENT = False # Current = False for All Except Home
     ALT_TYPE = ALT_TYPE # 0 is MSL, 3 is AGL
     CMD = 16 # Home Command is 16
     P1 = DELAY # Hover at WP for Delay
@@ -18,14 +18,14 @@ def WP(LAT, LONG, ALT, ALT_TYPE, DELAY): # Function for WP Command Line Generati
     P5 = LAT # Latitude Location
     P6 = LONG # Longitude Location
     P7 = ALT # Altitude (m)
-    AUTOCONTINUE = 1 # Continue With Auto Mission
+    AUTOCONTINUE = True # Continue With Auto Mission
     
     WP.Line = template.format(ROW, CURRENT, ALT_TYPE, CMD, P1, P2, P3, P4, P5, P6, P7, AUTOCONTINUE)
     file.write(WP.Line)
     
 def HOME(LAT, LONG): # Function for Home Command Line Generation
     ROW = 0 # Row Numbering Does Not Matter
-    CURRENT = 0 # Current = 0 for All Except Home
+    CURRENT = True # Current = False for All Except Home
     ALT_TYPE = 0 # 0 is MSL, 3 is AGL
     CMD = 16 # Waypoint Command is 16
     P1 = 0 # No Effect
@@ -35,14 +35,14 @@ def HOME(LAT, LONG): # Function for Home Command Line Generation
     P5 = LAT # Latitude Location
     P6 = LONG # Longitude Location
     P7 = 0 # Altitude (m)
-    AUTOCONTINUE = 1 # Continue With Auto Mission
+    AUTOCONTINUE = True # Continue With Auto Mission
     
     HOME.Line = template.format(ROW, CURRENT, ALT_TYPE, CMD, P1, P2, P3, P4, P5, P6, P7, AUTOCONTINUE)
     file.write(HOME.Line)
 
 def TKOFF(ALT, ALT_TYPE): # Function for TKOFF Command Line Generation
     ROW = 0 # Row Numbering Does Not Matter
-    CURRENT = 0 # Current = 0 for All Except Home
+    CURRENT = False # Current = False for All Except Home
     ALT_TYPE = ALT_TYPE # 0 is MSL, 3 is AGL
     CMD = 22 # Takeoff Command is 22
     P1 = 0 # No Effect
@@ -52,14 +52,14 @@ def TKOFF(ALT, ALT_TYPE): # Function for TKOFF Command Line Generation
     P5 = 0 # No Effect
     P6 = 0 # No Effect
     P7 = ALT # Altitude (m)
-    AUTOCONTINUE = 1 # Continue With Auto Mission
+    AUTOCONTINUE = True # Continue With Auto Mission
     
     TKOFF.Line = template.format(ROW, CURRENT, ALT_TYPE, CMD, P1, P2, P3, P4, P5, P6, P7, AUTOCONTINUE)
     file.write(TKOFF.Line)
     
 def SERVO(SERVO_NUM, PWM): # Function for SERVO Command Line Generation
     ROW = 0 # Row Numbering Does Not Matter
-    CURRENT = 0 # Current = 0 for All Except Home
+    CURRENT = False # Current = False for All Except Home
     ALT_TYPE = 3 # No Effect
     CMD = 183 # Servo Trigger Command is 183
     P1 = SERVO_NUM # Servo Number
@@ -69,7 +69,7 @@ def SERVO(SERVO_NUM, PWM): # Function for SERVO Command Line Generation
     P5 = 0 # No Effect
     P6 = 0 # No Effect
     P7 = 0 # Not Effect
-    AUTOCONTINUE = 1 # Continue With Auto Mission
+    AUTOCONTINUE = True # Continue With Auto Mission
     
     SERVO.Line = template.format(ROW, CURRENT, ALT_TYPE, CMD, P1, P2, P3, P4, P5, P6, P7, AUTOCONTINUE)
     file.write(SERVO.Line)
@@ -80,7 +80,7 @@ def POLYGON(LAT, LONG): # Function for Polygon Line Generation
     
 def ST_OBS(LAT, LONG, RAD, ALT): # Function for ST_OBS Line Generation
     ROW = 0 # Row Numbering Does Not Matter
-    CURRENT = 0 # Current = 0 for All Except Home
+    CURRENT = False # Current = False for All Except Home
     ALT_TYPE = 0 # 0 is MSL, 3 is AGL
     CMD = 5004 # Circular Exlusion is 5004
     P1 = RAD # Cylinder Radius
@@ -90,14 +90,14 @@ def ST_OBS(LAT, LONG, RAD, ALT): # Function for ST_OBS Line Generation
     P5 = LAT # Latitude Location
     P6 = LONG # Longitude Location
     P7 = ALT # Altitude (m)
-    AUTOCONTINUE = 1 # Continue With Auto Mission
+    AUTOCONTINUE = True # Continue With Auto Mission
     
     ST_OBS.Line = template.format(ROW, CURRENT, ALT_TYPE, CMD, P1, P2, P3, P4, P5, P6, P7, AUTOCONTINUE)
     file.write(ST_OBS.Line)
 
 def FENCE(LAT, LONG, ALT, NUM_POINTS): # Function for FENCE Line Generation
     ROW = 0 # Row Numbering Does Not Matter
-    CURRENT = 0 # Current = 0 for All Except Home
+    CURRENT = False # Current = False for All Except Home
     ALT_TYPE = 0 # 0 is MSL, 3 is AGL
     CMD = 5001 # Fence Inclusion is 5001
     P1 = NUM_POINTS # Number of Sides
@@ -107,7 +107,7 @@ def FENCE(LAT, LONG, ALT, NUM_POINTS): # Function for FENCE Line Generation
     P5 = LAT # Latitude Location
     P6 = LONG # Longitude Location
     P7 = ALT # Altitude (m)
-    AUTOCONTINUE = 1 # Continue With Auto Mission
+    AUTOCONTINUE = True # Continue With Auto Mission
     
     FENCE.Line = template.format(ROW, CURRENT, ALT_TYPE, CMD, P1, P2, P3, P4, P5, P6, P7, AUTOCONTINUE)
     file.write(FENCE.Line)
