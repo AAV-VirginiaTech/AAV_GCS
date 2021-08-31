@@ -119,7 +119,7 @@ file = open("UAV_mission.waypoints",'w+')
 file.write("QGC WPL 110\n")  # Required Header for Waypoint Files
 
 HOME(38.145228, -76.426905) # Set Home Point (LAT, LONG)
-TKOFF(30.5, 0) # Set Takeoff (ALT, ALT_TYPE)
+TKOFF(35, 0) # Set Takeoff (ALT, ALT_TYPE)
 
 # Addition of Target Waypoints
 waypoints = mission["waypoints"]
