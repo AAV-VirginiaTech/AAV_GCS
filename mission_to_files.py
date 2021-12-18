@@ -129,7 +129,7 @@ for waypoint in waypoints:
 # Addition of Airdrop Sequence
 airdrop_lat = mission["airDropPos"]['latitude']
 airdrop_long = mission["airDropPos"]['longitude']
-airdrop_alt = 30 # Manually Enter Based On Testing
+airdrop_alt = 30.48 # Manually Enter Based On Testing
 
 WP(airdrop_lat, airdrop_long, airdrop_alt, 3, 0) # Fly to Airdrop Location
 SERVO(11, 1900) # Trigger Release
