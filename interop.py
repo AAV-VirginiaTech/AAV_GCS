@@ -124,7 +124,7 @@ TKOFF(35, 0) # Set Takeoff
 # Addition of Target Waypoints
 waypoints = mission["waypoints"]
 for waypoint in waypoints:
-    WP(waypoint['latitude'], waypoint['longitude'], waypoint['altitude']/3.28084, 0, 0)
+    WP(waypoint['latitude'], waypoint['longitude'], waypoint['altitude']/3.28084, 0, 1)
 
 # Addition of Airdrop Sequence
 airdrop_lat = mission["airDropPos"]['latitude']
