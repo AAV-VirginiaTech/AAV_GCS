@@ -4,6 +4,7 @@ import json
 mission = open("interop_mission.txt", "r").read()
 mission = json.loads(mission)
 template = '{0:d}\t{1:d}\t{2:d}\t{3:d}\t{4:.8f}\t{5:.8f}\t{6:.8f}\t{7:.8f}\t{8:.8f}\t{9:.8f}\t{10:.8f}\t{11:d}\n'
+
 # ------------------------------------------------------------------------------------------------------------------
 
 def WP(LAT, LONG, ALT, ALT_TYPE, DELAY): # Function for WP Command Line Generation
@@ -40,10 +41,10 @@ def HOME(LAT, LONG): # Function for Home Command Line Generation
     HOME.Line = template.format(ROW, CURRENT, ALT_TYPE, CMD, P1, P2, P3, P4, P5, P6, P7, AUTOCONTINUE)
     file.write(HOME.Line)
 
-def TKOFF(ALT, ALT_TYPE): # Function for TKOFF Command Line Generation
+def TKOFF(ALT): # Function for TKOFF Command Line Generation
     ROW = 0 # Row Numbering Does Not Matter
     CURRENT = False # Current = False for All Except Home
-    ALT_TYPE = ALT_TYPE # 0 is MSL, 3 is AGL
+    ALT_TYPE = 0 # 0 is MSL, 3 is AGL
     CMD = 22 # Takeoff Command is 22
     P1 = 0 # No Effect
     P2 = 0 # No Effect
@@ -118,15 +119,15 @@ def FENCE(LAT, LONG, ALT, NUM_POINTS): # Function for FENCE Line Generation
 file = open("UAV_mission.waypoints",'w+')
 file.write("QGC WPL 110\n")  # Required Header for Waypoint Files
 
-HOME(38.145228, -76.426905) # Set Home Point
-TKOFF(35, 0) # Set Takeoff
+HOME(38.145228, -76.426905) # Set Home Point (LAT, LONG)
+TKOFF(30.48) # Set Takeoff (ALT, ALT_TYPE)
 
 # Addition of Target Waypoints
 waypoints = mission["waypoints"]
 for waypoint in waypoints:
-    WP(waypoint['latitude'], waypoint['longitude'], waypoint['altitude']/3.28084, 0, 1)
+  WP(waypoint['latitude'], waypoint['longitude'], waypoint['altitude']/3.28084, 0, 0) # LAT, LONG, ALT, ALT_TYPE, DELAY
 
-# Addition of Airdrop Sequence
+# Addition of Airdrop Sequence (Relative Altitudes)
 airdrop_lat = mission["airDropPos"]['latitude']
 airdrop_long = mission["airDropPos"]['longitude']
 airdrop_alt = 30.48 # Manually Enter Based On Testing
@@ -147,8 +148,11 @@ file.close() # Close File
 file = open("UGV_mission.waypoints", "w+")
 file.write("QGC WPL 110\n")  # Required Header for Waypoint Files
 
+ugv_lat = mission["ugvDrivePos"]['latitude']
+ugv_long = mission["ugvDrivePos"]['longitude']
+
 HOME(airdrop_lat, airdrop_long) # Set Home Location of UGV
-WP(mission["ugvDrivePos"]['latitude'], mission["ugvDrivePos"]['longitude'], 0, 0, 0) # Set Target Location of UGV
+WP(ugv_lat, ugv_long, 0, 0, 0) # Set Target Location of UGV
 
 file.close() #Close File
 
@@ -166,7 +170,7 @@ for obstacle in obstacles:
 # Add Geofence to Fence File
 boundaryPoints = mission["flyZones"][0]["boundaryPoints"]
 for boundaryPoint in boundaryPoints:
-    FENCE(boundaryPoint['latitude'], boundaryPoint['longitude'], (mission["flyZones"][0]['altitudeMax'])/3.28084, len(boundaryPoints))
+  FENCE(boundaryPoint['latitude'], boundaryPoint['longitude'], (mission["flyZones"][0]['altitudeMax'])/3.28084, len(boundaryPoints))
 
 file.close() # Close File
 
