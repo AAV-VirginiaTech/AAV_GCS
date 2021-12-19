@@ -125,7 +125,7 @@ TKOFF(30.48) # Set Takeoff (ALT, ALT_TYPE)
 # Addition of Target Waypoints
 waypoints = mission["waypoints"]
 for waypoint in waypoints:
-  WP(waypoint['latitude'], waypoint['longitude'], waypoint['altitude']/3.28084, 0, 0) # LAT, LONG, ALT, ALT_TYPE, DELAY
+    WP(waypoint['latitude'], waypoint['longitude'], waypoint['altitude']/3.28084, 0, 0) # LAT, LONG, ALT, ALT_TYPE, DELAY
 
 # Addition of Airdrop Sequence (Relative Altitudes)
 airdrop_lat = mission["airDropPos"]['latitude']
@@ -170,7 +170,7 @@ for obstacle in obstacles:
 # Add Geofence to Fence File
 boundaryPoints = mission["flyZones"][0]["boundaryPoints"]
 for boundaryPoint in boundaryPoints:
-  FENCE(boundaryPoint['latitude'], boundaryPoint['longitude'], (mission["flyZones"][0]['altitudeMax'])/3.28084, len(boundaryPoints))
+    FENCE(boundaryPoint['latitude'], boundaryPoint['longitude'], (mission["flyZones"][0]['altitudeMax'])/3.28084, len(boundaryPoints))
 
 file.close() # Close File
 
