@@ -183,12 +183,13 @@ map_height = mission["mapHeight"]/3.28084
 map_width = ((16.0/9.0)*map_height)
 map_cent_lat = mission["mapCenterPos"]['latitude']
 map_cent_long = mission["mapCenterPos"]['longitude']
+conv_factor = 111111.0 # Conversion from XY to Lat Long (Only Works for Small Areas)
 
 # Calculate and Push Four Vertices of Map
-map_north_lat = map_cent_lat + (map_height/(2*111111.0))
-map_south_lat = map_cent_lat - (map_height/(2*111111.0))
-map_east_long = map_cent_long + ((map_width/2)/math.cos(math.radians(map_cent_lat))/111000.0)
-map_west_long = map_cent_long - ((map_width/2)/math.cos(math.radians(map_cent_lat))/111000.0)
+map_north_lat = map_cent_lat + (map_height/(2*conv_factor))
+map_south_lat = map_cent_lat - (map_height/(2*conv_factor))
+map_east_long = map_cent_long + ((map_width/2)/math.cos(math.radians(map_cent_lat))/conv_factor)
+map_west_long = map_cent_long - ((map_width/2)/math.cos(math.radians(map_cent_lat))/conv_factor)
 
 POLYGON(map_north_lat, map_east_long)
 POLYGON(map_north_lat, map_west_long)
