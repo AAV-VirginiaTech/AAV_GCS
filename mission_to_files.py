@@ -162,6 +162,8 @@ file.close() #Close File
 file = open("UAV_fence.waypoints",'w+') 
 file.write("QGC WPL 110\n") # Required Header for Waypoint Files
 
+HOME(38.145228, -76.426905) # Set Home Point (LAT, LONG)
+
 # Add Obstacles to Fence File
 obstacles = mission["stationaryObstacles"]
 for obstacle in obstacles:
