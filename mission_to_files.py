@@ -1,6 +1,7 @@
 #Base file for taking interop data output and converting to mission planner files. Multiple files for the UGV and UAV are outputted.
 import math
 import json
+from pyproj import Proj
 mission = open("interop_mission.txt", "r").read()
 mission = json.loads(mission)
 template = '{0:d}\t{1:d}\t{2:d}\t{3:d}\t{4:.8f}\t{5:.8f}\t{6:.8f}\t{7:.8f}\t{8:.8f}\t{9:.8f}\t{10:.8f}\t{11:d}\n'
@@ -183,15 +184,21 @@ file = open("mapping.poly", "w+")
 
 map_height = mission["mapHeight"]/3.28084
 map_width = ((16.0/9.0)*map_height)
-map_cent_lat = mission["mapCenterPos"]['latitude']
-map_cent_long = mission["mapCenterPos"]['longitude']
-conv_factor = 111111.0 # Conversion from XY to Lat Long (Only Works for Small Areas)
+map_cent_lat, map_cent_long = mission["mapCenterPos"]['latitude'], mission["mapCenterPos"]['longitude']
 
-# Calculate and Push Four Vertices of Map
-map_north_lat = map_cent_lat + (map_height/(2*conv_factor))
-map_south_lat = map_cent_lat - (map_height/(2*conv_factor))
-map_east_long = map_cent_long + ((map_width/2)/math.cos(math.radians(map_cent_lat))/conv_factor)
-map_west_long = map_cent_long - ((map_width/2)/math.cos(math.radians(map_cent_lat))/conv_factor)
+# Convert Center UTM to Center XY
+utm_zone = math.floor((map_cent_long + 180)/6)+1 # Calculate UTM Zone for Conversion
+utm_xy_conv = Proj(proj='utm',zone=utm_zone, ellps='WGS84') # Setup Conversion Parameters
+
+map_cent_x, map_cent_y = utm_xy_conv(map_cent_long, map_cent_lat)
+
+# Calculate Four Vertices in XY
+map_north_y, map_south_y = map_cent_y + map_height/2, map_cent_y - map_height/2
+map_east_x, map_west_x = map_cent_x + map_width/2, map_cent_x - map_width/2
+
+# Convert Four Vertise to UTM
+map_east_long, map_north_lat = utm_xy_conv(map_east_x, map_north_y, inverse=True)
+map_west_long, map_south_lat = utm_xy_conv(map_west_x, map_south_y, inverse=True)
 
 POLYGON(map_north_lat, map_east_long)
 POLYGON(map_north_lat, map_west_long)
