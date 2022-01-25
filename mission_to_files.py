@@ -12,7 +12,7 @@ def WP(LAT, LONG, ALT, ALT_TYPE, DELAY): # Function for WP Command Line Generati
     ROW = 0 # Row Numbering Does Not Matter
     CURRENT = False # Current = False for All Except Home
     ALT_TYPE = ALT_TYPE # 0 is MSL, 3 is AGL
-    CMD = 16 # Home Command is 16
+    CMD = 16 # WP Command is 16
     P1 = DELAY # Hover at WP for Delay
     P2 = 0 # No Effect
     P3 = 0 # No Effect
@@ -29,7 +29,7 @@ def HOME(LAT, LONG): # Function for Home Command Line Generation
     ROW = 0 # Row Numbering Does Not Matter
     CURRENT = True # Current = False for All Except Home
     ALT_TYPE = 0 # 0 is MSL, 3 is AGL
-    CMD = 16 # Waypoint Command is 16
+    CMD = 16 # Home Command is 16
     P1 = 0 # No Effect
     P2 = 0 # No Effect
     P3 = 0 # No Effect
