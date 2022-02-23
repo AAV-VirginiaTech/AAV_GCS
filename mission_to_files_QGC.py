@@ -8,7 +8,6 @@ import pprint
 mission = open("interop_mission.txt", "r").read()
 mission = json.loads(mission)
 
-
 def generate_UAV_plan():  # Create Plan/Mission for UAV
     # Setup Plan Dictionary
     plan = {
@@ -18,14 +17,14 @@ def generate_UAV_plan():  # Create Plan/Mission for UAV
     }
 
     mission_items = []  # Create Mission Items List
-    mission_items.append(TKOFF(30.48))  # Set Takeoff (ALT, ALT_TYPE)
+    mission_items.append(TKOFF(30.48, "AGL"))  # Set Takeoff (ALT, ALT_TYPE)
 
     # Add Target Waypoints
     waypoints = mission["waypoints"]
     for waypoint in waypoints:
         # LAT, LONG, ALT, ALT_TYPE, DELAY
         waypoint_item = WP(
-            waypoint['latitude'], waypoint['longitude'], waypoint['altitude']/3.28084, 2, 0)
+            waypoint['latitude'], waypoint['longitude'], waypoint['altitude']/3.28084, "MSL", 0)
         mission_items.append(waypoint_item)
 
     # Add Airdrop Sequence (Relative Altitudes)
@@ -34,14 +33,14 @@ def generate_UAV_plan():  # Create Plan/Mission for UAV
     airdrop_alt = 30.48  # Manually Enter Based On Testing
 
     # Fly to Airdrop Location
-    mission_items.append(WP(airdrop_lat, airdrop_long, airdrop_alt, 1, 5))
+    mission_items.append(WP(airdrop_lat, airdrop_long, airdrop_alt, "AGL", 5))
     mission_items.append(SERVO(11, 1900))  # Trigger Release
     mission_items.append(SERVO(10, 900))  # Trigger Winch
     # Wait for Delivery
-    mission_items.append(WP(airdrop_lat, airdrop_long, airdrop_alt, 1, 20))
+    mission_items.append(WP(airdrop_lat, airdrop_long, airdrop_alt, "AGL", 20))
     mission_items.append(SERVO(10, 2100))  # Real Back Winch
     # Wait for Real Back
-    mission_items.append(WP(airdrop_lat, airdrop_long, airdrop_alt, 1, 20))
+    mission_items.append(WP(airdrop_lat, airdrop_long, airdrop_alt, "AGL", 20))
     mission_items.append(SERVO(10, 1500))  # Stop Winch
 
     mission_items.append(RTL())  # RTL Command
@@ -70,10 +69,10 @@ def generate_UAV_plan():  # Create Plan/Mission for UAV
 
     # Add Information to Plan JSON
     plan["mission"] = {
-        "cruiseSpeed": 20,
+        "cruiseSpeed": 1,
         "firmwareType": 3,
         "globalPlanAltitudeMode": 0,
-        "hoverSpeed": 20,
+        "hoverSpeed": 1,
         "items": mission_items,
         "plannedHomePosition": [38.145228, -76.426905, 0],
         "vehicleType": 2,
@@ -113,7 +112,7 @@ def generate_UGV_plan():  # Create Plan/Mission for UGV
 
     # Create Mission to Drive to Location
     mission_items = []
-    mission_items.append(WP(ugv_lat, ugv_long, 0, 1, 0)
+    mission_items.append(WP(ugv_lat, ugv_long, 0, "AGL", 0)
                          )  # Set Target Location of UGV
 
     # Add Polygon Geofence
@@ -286,15 +285,22 @@ def WP(LAT, LONG, ALT, ALT_TYPE, DELAY):  # Convert WP to Mission WP
     P5 = LAT  # Latitude Location
     P6 = LONG  # Longitude Location
     P7 = ALT  # Altitude (m)
+    
+    if ALT_TYPE == "MSL":
+        alt_mode = 2
+        frame = 0
+    elif ALT_TYPE == "AGL":
+        alt_mode = 1
+        frame = 3
 
     waypoint_item = {
         "AMSLAltAboveTerrain": 0,
         "Altitude": ALT,
-        "AltitudeMode": ALT_TYPE,
+        "AltitudeMode": alt_mode,
         "autoContinue": True,
         "command": 16,  # WP Command is 16
         "doJumpId": 1,
-        "frame": 0,
+        "frame": frame,
         "params": [P1, P2, P3, P4, P5, P6, P7],
         "type": "SimpleItem"
     }
@@ -302,7 +308,7 @@ def WP(LAT, LONG, ALT, ALT_TYPE, DELAY):  # Convert WP to Mission WP
     return waypoint_item
 
 
-def TKOFF(ALT):  # TKOFF Mission Item Generation
+def TKOFF(ALT, ALT_TYPE):  # TKOFF Mission Item Generation
     P1 = 0  # No Effect
     P2 = 0  # No Effect
     P3 = 0  # No Effect
@@ -311,14 +317,21 @@ def TKOFF(ALT):  # TKOFF Mission Item Generation
     P6 = 0  # No Effect
     P7 = ALT  # Altitude (m)
 
+    if ALT_TYPE == "MSL":
+        alt_mode = 2
+        frame = 0
+    elif ALT_TYPE == "AGL":
+        alt_mode = 1
+        frame = 3
+
     takeoff_item = {
         "AMSLAltAboveTerrain": 0,
         "Altitude": ALT,
-        "AltitudeMode": 2,
+        "AltitudeMode": alt_mode,
         "autoContinue": True,
         "command": 22,  # Takeoff Command is 22
         "doJumpId": 1,
-        "frame": 0,
+        "frame": frame,
         "params": [P1, P2, P3, P4, P5, P6, P7],
         "type": "SimpleItem"
     }
