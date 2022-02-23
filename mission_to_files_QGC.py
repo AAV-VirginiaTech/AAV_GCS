@@ -136,7 +136,7 @@ def generate_UGV_plan():  # Create Plan/Mission for UGV
         "hoverSpeed": 20,
         "items": mission_items,
         "plannedHomePosition": [airdrop_lat, airdrop_long, 0],
-        "vehicleType": 2,
+        "vehicleType": 10,
         "version": 2
     }
 
