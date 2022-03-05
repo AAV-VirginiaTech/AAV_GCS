@@ -7,6 +7,7 @@ import pprint
 # Load Mission from File
 mission = open("interop_mission.txt", "r").read()
 mission = json.loads(mission)
+m2ft = 3.2808398950131235
 
 def generate_UAV_plan():  # Create Plan/Mission for UAV
     # Setup Plan Dictionary
@@ -24,7 +25,7 @@ def generate_UAV_plan():  # Create Plan/Mission for UAV
     for waypoint in waypoints:
         # LAT, LONG, ALT, ALT_TYPE, DELAY
         waypoint_item = WP(
-            waypoint['latitude'], waypoint['longitude'], waypoint['altitude']/3.28084, "MSL", 0)
+            waypoint['latitude'], waypoint['longitude'], waypoint['altitude']/m2ft, "MSL", 0)
         mission_items.append(waypoint_item)
 
     # Add Airdrop Sequence (Relative Altitudes)
@@ -50,7 +51,7 @@ def generate_UAV_plan():  # Create Plan/Mission for UAV
     obstacles = mission["stationaryObstacles"]
     for obstacle in obstacles:
         LAT, LONG = obstacle['latitude'], obstacle['longitude']
-        RAD, ALT = obstacle['radius']/3.28084, obstacle['height']/3.28084
+        RAD, ALT = obstacle['radius']/m2ft, obstacle['height']/m2ft
         geoFence_circle = ST_OBS(LAT, LONG, RAD, ALT)
         geoFence_circles.append(geoFence_circle)
 
@@ -158,7 +159,7 @@ def generate_UGV_plan():  # Create Plan/Mission for UGV
 
 
 def generate_map():  # Create Mapping File
-    map_height = mission["mapHeight"]/3.28084
+    map_height = mission["mapHeight"]/m2ft
     map_width = ((16.0/9.0)*map_height)
     map_cent_lat, map_cent_long = mission["mapCenterPos"]['latitude'], mission["mapCenterPos"]['longitude']
 
@@ -385,7 +386,7 @@ def ST_OBS(LAT, LONG, RAD, ALT):  # Convert ST_OBS to Circular Exclusion Fences
     geoFence_circle = {}
     geoFence_circle["circle"] = {}
     geoFence_circle["circle"]["center"] = [LAT, LONG]
-    geoFence_circle["circle"]["radius"] = RAD
+    geoFence_circle["circle"]["radius"] = RAD + ALT/1000
     geoFence_circle["inclusion"] = False
     geoFence_circle["version"] = 1
 
