@@ -3,11 +3,21 @@ import math
 import json
 from pyproj import Proj
 import pprint
+import os
 
-# Load Mission from File
+
+# Navigate to Mision File Directory and Load Mission from File
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
+os.chdir('..')
 mission = open("interop_mission.txt", "r").read()
 mission = json.loads(mission)
+
+# Navigate Back to Directory for Outputted Files
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
+# Set Variables
 m2ft = 3.2808398950131235
+
 
 def generate_UAV_plan():  # Create Plan/Mission for UAV
     # Setup Plan Dictionary
