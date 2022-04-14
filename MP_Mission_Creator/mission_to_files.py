@@ -1,4 +1,6 @@
-#Base file for taking interop data output and converting to mission planner files. Multiple files for the UGV and UAV are outputted.
+# THIS FILE HAS NOT BEEN UPDATED/TOUCHED SINCE THE TEAM MOVED TO QGroundControl in Spring 2022! THUS - SOME FEATURES MAY BE MISSING!
+
+# Base file for taking interop data output and converting to mission planner files. Multiple files for the UGV and UAV are outputted.
 import math
 import json
 from pyproj import Proj
