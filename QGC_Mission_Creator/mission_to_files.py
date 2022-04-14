@@ -122,8 +122,9 @@ def generate_UGV_plan():  # Create Plan/Mission for UGV
 
     # Create Mission to Drive to Location
     mission_items = []
-    mission_items.append(WP(ugv_lat, ugv_long, 0, "AGL", 0)
-                         )  # Set Target Location of UGV
+    mission_items.append(DELAY(10)) # 10 Second Delay Before Starting Mission
+    mission_items.append(SERVO(9, 1100)) # Release String via Servo Latch
+    mission_items.append(WP(ugv_lat, ugv_long, 0, "AGL", 0))  # Set Target Location of UGV
 
     # Add Polygon Geofence
     geoFence_polygon = []
@@ -381,7 +382,7 @@ def SERVO(SERVO_NUM, PWM):  # SERVO Mission Item Generation
 
     servo_item = {
         "autoContinue": True,
-        "command": 183,  # Servo Command is 16
+        "command": 183,  # Servo Command is 183
         "doJumpId": 1,
         "frame": 2,
         "params": [P1, P2, P3, P4, P5, P6, P7],
@@ -389,6 +390,26 @@ def SERVO(SERVO_NUM, PWM):  # SERVO Mission Item Generation
     }
 
     return servo_item
+
+def DELAY(TIME):  # Delay Mission Item Generation
+    P1 = TIME  # Delay Time (sec)
+    P2 = 0  # No Effect
+    P3 = 0  # No Effect
+    P4 = 0  # No Effect
+    P5 = 0  # No Effect
+    P6 = 0  # No Effect
+    P7 = 0  # No Effect
+
+    delay_item = {
+        "autoContinue": True,
+        "command": 93,  # Delay Command is 16
+        "doJumpId": 1,
+        "frame": 2,
+        "params": [P1, P2, P3, P4, P5, P6, P7],
+        "type": "SimpleItem"
+    }
+
+    return delay_item
 
 
 def ST_OBS(LAT, LONG, RAD, ALT):  # Convert ST_OBS to Circular Exclusion Fences
