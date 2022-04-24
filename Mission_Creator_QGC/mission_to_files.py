@@ -46,9 +46,11 @@ def generate_UAV_plan():  # Create Plan/Mission for UAV
     mission_items.append(WP(airdrop_lat, airdrop_long, airdrop_alt, "AGL", 5))
     mission_items.append(SERVO(11, 1900))  # Trigger Release
     mission_items.append(SERVO(10, 900))  # Trigger Winch
+    
     # Wait for Delivery
     mission_items.append(WP(airdrop_lat, airdrop_long, airdrop_alt, "AGL", 20))
     mission_items.append(SERVO(10, 2100))  # Real Back Winch
+    
     # Wait for Real Back
     mission_items.append(WP(airdrop_lat, airdrop_long, airdrop_alt, "AGL", 20))
     mission_items.append(SERVO(10, 1500))  # Stop Winch
