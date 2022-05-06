@@ -37,23 +37,17 @@ def generate_UAV_plan():  # Create Plan/Mission for UAV
             waypoint['latitude'], waypoint['longitude'], waypoint['altitude']/m2ft, "MSL", 0)
         mission_items.append(waypoint_item)
 
-    # Add Airdrop Sequence (Relative Altitudes)
+    # Add Airdrop Sequence
     airdrop_lat = mission["airDropPos"]['latitude']
     airdrop_long = mission["airDropPos"]['longitude']
-    airdrop_alt = 30.48  # Manually Enter Based On Testing
+    airdrop_alt = 30.48  # Manually Enter Based On Testing (Relative Altitude)
 
-    # Fly to Airdrop Location
-    mission_items.append(WP(airdrop_lat, airdrop_long, airdrop_alt, "AGL", 5))
-    mission_items.append(SERVO(11, 1900))  # Trigger Release
-    mission_items.append(SERVO(10, 900))  # Trigger Winch
-    
-    # Wait for Delivery
-    mission_items.append(WP(airdrop_lat, airdrop_long, airdrop_alt, "AGL", 20))
-    mission_items.append(SERVO(10, 2100))  # Real Back Winch
-    
-    # Wait for Real Back
-    mission_items.append(WP(airdrop_lat, airdrop_long, airdrop_alt, "AGL", 20))
+    mission_items.append(WP(airdrop_lat, airdrop_long, airdrop_alt, "AGL", 5)) # Fly to Airdrop Location
+    mission_items.append(SERVO(9, 1900))  # Trigger Release
+    mission_items.append(SERVO(10, 1000))  # Trigger Winch
+    mission_items.append(DELAY(30))  # Wait for Delivery
     mission_items.append(SERVO(10, 1500))  # Stop Winch
+    # End Airdrop Sequence
 
     mission_items.append(RTL())  # RTL Command
 
@@ -124,8 +118,8 @@ def generate_UGV_plan():  # Create Plan/Mission for UGV
 
     # Create Mission to Drive to Location
     mission_items = []
-    mission_items.append(DELAY(10)) # 10 Second Delay Before Starting Mission
-    mission_items.append(SERVO(6, 2500)) # Release String via Servo Latch
+    # mission_items.append(DELAY(10)) # 10 Second Delay Before Starting Mission
+    # mission_items.append(SERVO(6, 2500)) # Release String via Servo Latch
     mission_items.append(WP(ugv_lat, ugv_long, 1, "AGL", 0))  # Set Target Location of UGV
 
     # Add Polygon Geofence
