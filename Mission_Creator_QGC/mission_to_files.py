@@ -47,7 +47,7 @@ def generate_UAV_plan():  # Create Plan/Mission for UAV
     mission_items.append(SERVO(9, 1900))  # Trigger Release
     mission_items.append(SERVO(10, 1000))  # Trigger Winch (High Speed)
     mission_items.append(DELAY(10))  # High Speed Portion
-    mission_items.append(SERVO(10, 1000))  # Trigger Winch (Low Speed)
+    mission_items.append(SERVO(10, 1500))  # Trigger Winch (Low Speed w/ Stop)
     mission_items.append(DELAY(20))  # Wait for Delivery to Complete
     mission_items.append(SERVO(10, 1900))  # Real Back Winch
     mission_items.append(DELAY(15))  # Wait for Real Back to Complete
