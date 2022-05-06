@@ -37,15 +37,20 @@ def generate_UAV_plan():  # Create Plan/Mission for UAV
             waypoint['latitude'], waypoint['longitude'], waypoint['altitude']/m2ft, "MSL", 0)
         mission_items.append(waypoint_item)
 
-    # Add Airdrop Sequence
+    # Airdrop Information
     airdrop_lat = mission["airDropPos"]['latitude']
     airdrop_long = mission["airDropPos"]['longitude']
     airdrop_alt = 30.48  # Manually Enter Based On Testing (Relative Altitude)
 
+    # Start Airdrop Sequence
     mission_items.append(WP(airdrop_lat, airdrop_long, airdrop_alt, "AGL", 5)) # Fly to Airdrop Location
     mission_items.append(SERVO(9, 1900))  # Trigger Release
-    mission_items.append(SERVO(10, 1000))  # Trigger Winch
-    mission_items.append(DELAY(30))  # Wait for Delivery
+    mission_items.append(SERVO(10, 1000))  # Trigger Winch (High Speed)
+    mission_items.append(DELAY(10))  # High Speed Portion
+    mission_items.append(SERVO(10, 1000))  # Trigger Winch (Low Speed)
+    mission_items.append(DELAY(20))  # Wait for Delivery to Complete
+    mission_items.append(SERVO(10, 1900))  # Real Back Winch
+    mission_items.append(DELAY(15))  # Wait for Real Back to Complete
     mission_items.append(SERVO(10, 1500))  # Stop Winch
     # End Airdrop Sequence
 
