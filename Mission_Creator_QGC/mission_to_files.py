@@ -403,7 +403,7 @@ def DELAY(TIME):  # Delay Mission Item Generation
 
     delay_item = {
         "autoContinue": True,
-        "command": 93,  # Delay Command is 16
+        "command": 93,  # Delay Command is 93
         "doJumpId": 1,
         "frame": 2,
         "params": [P1, P2, P3, P4, P5, P6, P7],
