@@ -123,8 +123,8 @@ def generate_UGV_plan():  # Create Plan/Mission for UGV
 
     # Create Mission to Drive to Location
     mission_items = []
-    # mission_items.append(DELAY(10)) # 10 Second Delay Before Starting Mission
-    # mission_items.append(SERVO(6, 2500)) # Release String via Servo Latch
+    mission_items.append(SERVO(6, 2500)) # Release String via Servo Latch
+    mission_items.append(DELAY(20)) # 20 Second Delay Before Starting Mission
     mission_items.append(WP(ugv_lat, ugv_long, 1, "AGL", 0))  # Set Target Location of UGV
 
     # Add Polygon Geofence
