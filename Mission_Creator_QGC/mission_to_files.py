@@ -85,7 +85,7 @@ def generate_UAV_plan():  # Create Plan/Mission for UAV
         "globalPlanAltitudeMode": 0,
         "hoverSpeed": 1,
         "items": mission_items,
-        "plannedHomePosition": [38.145228, -76.426905, 0],
+        "plannedHomePosition": [38.315161, -76.548904, 42],
         "vehicleType": 2,
         "version": 2
     }
